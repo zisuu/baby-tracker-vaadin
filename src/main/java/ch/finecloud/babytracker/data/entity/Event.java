@@ -3,6 +3,7 @@ package ch.finecloud.babytracker.data.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +15,8 @@ public class Event extends AbstractEntity {
     private EventType eventType;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    @Size(max = 255)
+    @Column(length = 255)
     private String notes;
 
     @ManyToOne

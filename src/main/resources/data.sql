@@ -2,12 +2,12 @@ INSERT INTO "BABY" (ID, VERSION, NAME, BIRTHDAY) VALUES
 (6, 1, 'Naima', '2012-01-01'),
 (7, 1, 'Avaya', '2012-01-01');
 INSERT INTO "EVENT" (ID, VERSION, EVENT_TYPE, START_DATE, END_DATE, NOTES, BABY_ID, STATUS) VALUES
-(11, 1, 'BREAST_FEEDING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes', 6, 'COMPLETED'),
-(12, 1, 'BREAST_FEEDING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes',  7, 'COMPLETED'),
-(13, 1, 'BREAST_FEEDING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes', 6, 'COMPLETED'),
-(14, 1, 'BREAST_FEEDING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes', 7, 'COMPLETED');
+(11, 1, 'BREAST_FEEDING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Had to pause due to baby''s fussiness, resumed later.', 6, 'INTERRUPTED'),
+(12, 1, 'SLEEPING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Peaceful nap, steady breathing observed.',  7, 'INTERRUPTED'),
+(13, 1, 'DIAPER', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Successful diaper change, baby now clean and comfy.', 6, 'COMPLETED'),
+(14, 1, 'BATHING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Baby enjoyed the warm bath, splashing and giggling.', 7, 'COMPLETED');
 INSERT INTO "EVENT" (ID, VERSION, EVENT_TYPE, START_DATE, END_DATE, NOTES, BABY_ID, STATUS) VALUES
-(36, 1, 'SLEEPING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes', 7, 'COMPLETED'),
-(37, 1, 'SLEEPING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes',  6, 'COMPLETED'),
-(38, 1, 'SLEEPING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes', 6, 'COMPLETED'),
-(39, 1, 'SLEEPING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Notes', 7, 'COMPLETED');
+(36, 1, 'CRYING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Crying episode resolved, baby calm and content.', 7, 'COMPLETED'),
+(37, 1, 'DIAPER', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Successful diaper change, baby clean and happy.',  6, 'COMPLETED'),
+(38, 1, 'BOTTLE_FEEDING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Baby finished the bottle, seems satisfied.', 6, 'COMPLETED'),
+(39, 1, 'DIAPER', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Diaper change process started', 7, 'STARTED');

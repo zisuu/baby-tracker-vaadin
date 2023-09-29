@@ -19,6 +19,7 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
 
+import java.time.Duration;
 import java.util.List;
 
 public class EventForm extends FormLayout {
@@ -39,7 +40,9 @@ public class EventForm extends FormLayout {
         addClassName("event-form");
         binder.bindInstanceFields(this);
         startDate.setLabel("Start date and time");
+        startDate.setStep(Duration.ofMinutes(15));
         endDate.setLabel("End date and time");
+        endDate.setStep(Duration.ofMinutes(15));
         eventType.setItems(EventType.values());
         eventType.setItemLabelGenerator(EventType::getDisplayName);
         baby.setItems(babies);

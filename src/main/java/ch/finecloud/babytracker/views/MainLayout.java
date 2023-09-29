@@ -5,11 +5,15 @@ import ch.finecloud.babytracker.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
 public class MainLayout extends AppLayout {
@@ -19,34 +23,42 @@ public class MainLayout extends AppLayout {
         this.securityService = securityService;
         createHeader();
         createDrawer();
+
     }
 
     private void createHeader() {
         H1 logo = new H1("Baby Tracker");
         logo.addClassNames(
-            LumoUtility.FontSize.LARGE,
-            LumoUtility.Margin.MEDIUM);
+                LumoUtility.FontSize.LARGE,
+                LumoUtility.Margin.MEDIUM);
 
         String u = securityService.getAuthenticatedUser().getUsername();
-        Button logout = new Button("Log out " + u, e -> securityService.logout()); // <2>
-
-        var header = new HorizontalLayout(new DrawerToggle(), logo, logout);
+        Button logout = new Button("Log out " + u, e -> securityService.logout());
+        var themeToggle = new Checkbox("Dark mode");
+        themeToggle.addValueChangeListener(e -> setTheme(e.getValue()));
+        var header = new HorizontalLayout(new DrawerToggle(), logo, themeToggle, logout);
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.expand(logo); // <4>
         header.setWidthFull();
         header.addClassNames(
-            LumoUtility.Padding.Vertical.NONE,
-            LumoUtility.Padding.Horizontal.MEDIUM);
+                LumoUtility.Padding.Vertical.NONE,
+                LumoUtility.Padding.Horizontal.MEDIUM);
 
-        addToNavbar(header); 
-
+        addToNavbar(header);
     }
 
     private void createDrawer() {
         addToDrawer(new VerticalLayout(
-                new RouterLink("List", ListView.class),
-                new RouterLink("Dashboard", DashboardView.class)
+                new RouterLink("List", ListView.class)
+//                new RouterLink("Dashboard", DashboardView.class)
         ));
+    }
+
+
+    private void setTheme(boolean dark) {
+        var js = "document.documentElement.setAttribute('theme', $0)";
+
+        getElement().executeJs(js, dark ? Lumo.DARK : Lumo.LIGHT);
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ListViewTest {
+public class EventListViewTest {
 
     static {
         // Prevent Vaadin Development mode to launch browser window
@@ -20,14 +20,14 @@ public class ListViewTest {
     }
 
     @Autowired
-    private ListView listView;
+    private EventListView eventListView;
 
     @Test
     public void formShownWhenContactSelected() {
-        Grid<Event> grid = listView.grid;
+        Grid<Event> grid = eventListView.grid;
         Event firstEvent = getFirstItem(grid);
 
-        EventForm form = listView.form;
+        EventForm form = eventListView.form;
 
         assertFalse(form.isVisible());
         grid.asSingleSelect().setValue(firstEvent);

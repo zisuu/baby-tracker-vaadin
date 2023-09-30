@@ -25,7 +25,6 @@ public class Event extends AbstractEntity {
     @JsonIgnoreProperties({"events"})
     private Baby baby;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Status status;
 

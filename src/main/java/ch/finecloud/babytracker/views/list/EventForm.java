@@ -20,7 +20,6 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class EventForm extends FormLayout {

@@ -3,7 +3,10 @@ package ch.finecloud.babytracker.views;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H6;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -12,6 +15,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.theme.lumo.Lumo;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 
 @Route("login") 
 @PageTitle("Login | Baby Tracker")
@@ -34,10 +38,10 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		setSizeFull(); 
 		setAlignItems(Alignment.CENTER);
 		setJustifyContentMode(JustifyContentMode.CENTER);
-
-		login.setAction("login"); 
-
+		login.setForgotPasswordButtonVisible(false);
+		login.setAction("login");
 		add(new H1("Baby Tracker"), login, toggleButton);
+		add(new H6("version 0.0.2"), login, toggleButton);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package ch.finecloud.babytracker.views.list;
 
-import ch.finecloud.babytracker.data.entity.Event;
+import ch.finecloud.babytracker.data.entity.Baby;
 import ch.finecloud.babytracker.data.service.BabyTrackerService;
 import ch.finecloud.babytracker.views.MainLayout;
 import com.vaadin.flow.component.Component;
@@ -19,15 +19,15 @@ import org.springframework.context.annotation.Scope;
 @SpringComponent
 @Scope("prototype")
 @PermitAll
-@Route(value = "", layout = MainLayout.class)
+@Route(value = "babies", layout = MainLayout.class)
 @PageTitle("Babies | Baby Tracker")
-public class ListView extends VerticalLayout {
-    Grid<Event> grid = new Grid<>(Event.class);
+public class BabyListView extends VerticalLayout {
+    Grid<Baby> grid = new Grid<>(Baby.class);
     TextField filterText = new TextField();
-    EventForm form;
+    BabyForm babyForm;
     BabyTrackerService service;
 
-    public ListView(BabyTrackerService service) {
+    public BabyListView(BabyTrackerService service) {
         this.service = service;
         addClassName("list-view");
         setSizeFull();
@@ -36,52 +36,46 @@ public class ListView extends VerticalLayout {
 
         add(getToolbar(), getContent());
         updateList();
-        closeEditor();
+        closeBabyEditor();
     }
 
     private HorizontalLayout getContent() {
-        HorizontalLayout content = new HorizontalLayout(grid, form);
+        HorizontalLayout content = new HorizontalLayout(grid, babyForm);
         content.setFlexGrow(2, grid);
-        content.setFlexGrow(1, form);
+        content.setFlexGrow(1, babyForm);
         content.addClassNames("content");
         content.setSizeFull();
         return content;
     }
 
     private void configureForm() {
-        form = new EventForm(service.findAllBabies());
-        form.setWidth("25em");
-        form.addSaveListener(this::saveEvent); // <1>
-        form.addDeleteListener(this::deleteEvent); // <2>
-        form.addCloseListener(e -> closeEditor()); // <3>
+        babyForm = new BabyForm(service.findAllBabies(filterText.getValue()));
+        babyForm.setWidth("25em");
+        babyForm.addSaveListener(this::saveBaby); // <1>
+        babyForm.addDeleteListener(this::deleteBaby); // <2>
+        babyForm.addCloseListener(e -> closeBabyEditor()); // <3>
     }
 
-    private void saveEvent(EventForm.SaveEvent event) {
-        service.saveEvent(event.getEvent());
+    private void saveBaby(BabyForm.SaveBaby baby) {
+        service.saveBaby(baby.getBaby());
         updateList();
-        closeEditor();
+        closeBabyEditor();
     }
 
-    private void deleteEvent(EventForm.DeleteEvent event) {
-        service.deleteEvent(event.getEvent());
+    private void deleteBaby(BabyForm.DeleteBaby baby) {
+        service.deleteBaby(baby.getBaby());
         updateList();
-        closeEditor();
+        closeBabyEditor();
     }
 
     private void configureGrid() {
         grid.addClassNames("contact-grid");
         grid.setSizeFull();
-        grid.setColumns();
-        grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby");
-        grid.addColumn(event -> event.getEventType().getDisplayName()).setHeader("Event Type");
-        grid.addColumn("startDate");
-        grid.addColumn("endDate");
-        grid.addColumn("notes");
-        grid.addColumn(event -> event.getStatus().getDisplayName()).setHeader("Status");
+        grid.setColumns("name", "birthday");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(event ->
-                editEvent(event.getValue()));
+        grid.asSingleSelect().addValueChangeListener(baby ->
+                editBaby(baby.getValue()));
     }
 
     private Component getToolbar() {
@@ -90,37 +84,37 @@ public class ListView extends VerticalLayout {
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
 
-        Button addEventButton = new Button("Add event");
-        addEventButton.addClickListener(click -> addEvent());
+        Button addBabyButton = new Button("Add baby");
+        addBabyButton.addClickListener(click -> addBaby());
 
-        var toolbar = new HorizontalLayout(filterText, addEventButton);
+        var toolbar = new HorizontalLayout(filterText, addBabyButton);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
 
-    public void editEvent(Event event) {
-        if (event == null) {
-            closeEditor();
+    public void editBaby(Baby baby) {
+        if (baby == null) {
+            closeBabyEditor();
         } else {
-            form.setEvent(event);
-            form.setVisible(true);
+            babyForm.setBaby(baby);
+            babyForm.setVisible(true);
             addClassName("editing");
         }
     }
 
-    private void closeEditor() {
-        form.setEvent(null);
-        form.setVisible(false);
+    private void closeBabyEditor() {
+        babyForm.setBaby(null);
+        babyForm.setVisible(false);
         removeClassName("editing");
     }
 
-    private void addEvent() {
+    private void addBaby() {
         grid.asSingleSelect().clear();
-        editEvent(new Event());
+        editBaby(new Baby());
     }
 
 
     private void updateList() {
-        grid.setItems(service.findAllEvents(filterText.getValue()));
+        grid.setItems(service.findAllBabies(filterText.getValue()));
     }
 }

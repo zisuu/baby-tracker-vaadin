@@ -44,7 +44,23 @@ public class BabyTrackerService {
         eventRepository.save(event);
     }
 
-    public List<Baby> findAllBabies() {
-        return babyRepository.findAll();
+    public List<Baby> findAllBabies(String stringFilter) {
+        if (stringFilter == null || stringFilter.isEmpty()) {
+            return babyRepository.findAll();
+        } else {
+            return babyRepository.search(stringFilter);
+        }
+    }
+
+    public void saveBaby(Baby baby) {
+        if (baby == null) {
+            System.err.println("Baby is null. Are you sure you have connected your form to the application?");
+            return;
+        }
+        babyRepository.save(baby);
+    }
+
+    public void deleteBaby(Baby baby) {
+        babyRepository.delete(baby);
     }
 }

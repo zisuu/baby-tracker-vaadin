@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    @Query("select c from Event c " +
-            "where lower(c.baby.name) like lower(concat('%', :searchTerm, '%')) ")
+    @Query("select e from Event e " +
+            "where lower(e.notes) like lower(concat('%', :searchTerm, '%')) ")
     List<Event> search(@Param("searchTerm") String searchTerm);
 }

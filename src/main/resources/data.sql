@@ -11,3 +11,6 @@ INSERT INTO "EVENT" (ID, VERSION, EVENT_TYPE, START_DATE, END_DATE, NOTES, BABY_
 (37, 1, 'DIAPER', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Successful diaper change, baby clean and happy.',  6, 'COMPLETED'),
 (38, 1, 'BOTTLE_FEEDING', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Baby finished the bottle, seems satisfied.', 6, 'COMPLETED'),
 (39, 1, 'DIAPER', '1987-10-19T05:14:36', '1987-10-19T05:14:36', 'Diaper change process started', 7, 'STARTED');
+INSERT INTO "USER_ACCOUNT" (ID, VERSION, EMAIL, PASSWORD, ROLE) VALUES
+(1, 1, 'admin', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW', 'ADMIN'),
+(2, 1, 'user', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW', 'USER');

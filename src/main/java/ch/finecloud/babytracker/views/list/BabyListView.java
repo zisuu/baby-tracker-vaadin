@@ -13,6 +13,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.context.annotation.Scope;
 
@@ -22,12 +23,14 @@ import org.springframework.context.annotation.Scope;
 @Route(value = "babies", layout = MainLayout.class)
 @PageTitle("Babies | Baby Tracker")
 public class BabyListView extends VerticalLayout {
+    private final AuthenticationContext authenticationContext;
     Grid<Baby> grid = new Grid<>(Baby.class);
     TextField filterText = new TextField();
     BabyForm babyForm;
     BabyTrackerService service;
 
-    public BabyListView(BabyTrackerService service) {
+    public BabyListView(AuthenticationContext authenticationContext, BabyTrackerService service) {
+        this.authenticationContext = authenticationContext;
         this.service = service;
         addClassName("list-view");
         setSizeFull();
@@ -49,7 +52,7 @@ public class BabyListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        babyForm = new BabyForm(service.findAllBabies(filterText.getValue()));
+        babyForm = new BabyForm(service.findBabyByUserAccount_Email(null, getEmail()));
         babyForm.setWidth("25em");
         babyForm.addSaveListener(this::saveBaby); // <1>
         babyForm.addDeleteListener(this::deleteBaby); // <2>
@@ -115,6 +118,11 @@ public class BabyListView extends VerticalLayout {
 
 
     private void updateList() {
-        grid.setItems(service.findAllBabies(filterText.getValue()));
+        grid.setItems(service.findBabyByUserAccount_Email(filterText.getValue(), getEmail()));
+    }
+
+
+    private String getEmail() {
+        return authenticationContext.getPrincipalName().isPresent() ? authenticationContext.getPrincipalName().get() : "";
     }
 }

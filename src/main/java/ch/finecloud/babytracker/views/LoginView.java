@@ -16,13 +16,15 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 
 @Route("login") 
 @PageTitle("Login | Baby Tracker")
 @AnonymousAllowed
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
-	private final LoginForm login = new LoginForm(); 
+	private final LoginForm login = new LoginForm();
 
 	public LoginView(){
 		Button toggleButton = new Button("Dark mode", click -> {
@@ -41,7 +43,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		login.setForgotPasswordButtonVisible(false);
 		login.setAction("login");
 		add(new H1("Baby Tracker"), login, toggleButton);
-		add(new H6("version 0.0.2"), login, toggleButton);
+		add(new H6("version 0.0.3"), login, toggleButton);
 	}
 
 	@Override

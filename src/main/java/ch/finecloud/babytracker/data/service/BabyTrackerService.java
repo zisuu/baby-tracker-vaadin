@@ -4,8 +4,10 @@ import ch.finecloud.babytracker.data.entity.Event;
 import ch.finecloud.babytracker.data.entity.Baby;
 import ch.finecloud.babytracker.data.repository.BabyRepository;
 import ch.finecloud.babytracker.data.repository.EventRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service 
@@ -20,11 +22,21 @@ public class BabyTrackerService {
         this.babyRepository = babyRepository;
     }
 
-    public List<Event> findAllEvents(String stringFilter) {
-        if (stringFilter == null || stringFilter.isEmpty()) { 
-            return eventRepository.findAll();
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public List<Event> findAllEvents(String stringFilter) {
+//        if (stringFilter == null || stringFilter.isEmpty()) {
+//            return eventRepository.findAll();
+//        } else {
+//            return eventRepository.search(stringFilter);
+//        }
+//    }
+
+    @PreAuthorize("hasRole('USER')")
+    public List<Event> findAllEventsByUserAccountEmail(String stringFilter, String email) {
+        if (stringFilter == null || stringFilter.isEmpty()) {
+            return eventRepository.findEventsByBaby_UserAccount_Email(email);
         } else {
-            return eventRepository.search(stringFilter);
+            return eventRepository.searchEventsByBaby_UserAccount_Email(stringFilter, email);
         }
     }
 
@@ -44,11 +56,20 @@ public class BabyTrackerService {
         eventRepository.save(event);
     }
 
-    public List<Baby> findAllBabies(String stringFilter) {
+//    public List<Baby> findAllBabies(String stringFilter) {
+//        if (stringFilter == null || stringFilter.isEmpty()) {
+//            return babyRepository.findAll();
+//        } else {
+//            return babyRepository.search(stringFilter);
+//        }
+//    }
+
+    @PreAuthorize("hasRole('USER')")
+    public List<Baby> findBabyByUserAccount_Email(String stringFilter, String email) {
         if (stringFilter == null || stringFilter.isEmpty()) {
-            return babyRepository.findAll();
+            return babyRepository.findBabyByUserAccount_Email(email);
         } else {
-            return babyRepository.search(stringFilter);
+            return babyRepository.searchBabiesByUserAccount_Email(stringFilter, email);
         }
     }
 

@@ -10,18 +10,15 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.renderer.LocalDateTimeRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.context.annotation.Scope;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
+import java.security.Principal;
 
 @SpringComponent
 @Scope("prototype")
@@ -29,13 +26,15 @@ import java.util.Locale;
 @Route(value = "", layout = MainLayout.class)
 @PageTitle("Events | Baby Tracker")
 public class EventListView extends VerticalLayout {
+    private final AuthenticationContext authenticationContext;
     Grid<Event> grid = new Grid<>(Event.class);
     TextField filterText = new TextField();
     EventForm form;
     BabyTrackerService service;
 
-    public EventListView(BabyTrackerService service) {
+    public EventListView(BabyTrackerService service, AuthenticationContext authenticationContext) {
         this.service = service;
+        this.authenticationContext = authenticationContext;
         addClassName("list-view");
         setSizeFull();
         configureGrid();
@@ -56,7 +55,7 @@ public class EventListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new EventForm(service.findAllBabies(null));
+        form = new EventForm(service.findBabyByUserAccount_Email(null, getEmail()));
         form.setWidth("25em");
         form.addSaveListener(this::saveEvent); // <1>
         form.addDeleteListener(this::deleteEvent); // <2>
@@ -76,7 +75,7 @@ public class EventListView extends VerticalLayout {
     }
 
     private void configureGrid() {
-         grid.addClassNames("contact-grid");
+        grid.addClassNames("contact-grid");
         grid.setSizeFull();
         grid.setColumns();
         grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby");
@@ -131,6 +130,10 @@ public class EventListView extends VerticalLayout {
 
 
     private void updateList() {
-        grid.setItems(service.findAllEvents(filterText.getValue()));
+        grid.setItems(service.findAllEventsByUserAccountEmail(filterText.getValue(), getEmail()));
+    }
+
+    private String getEmail() {
+        return authenticationContext.getPrincipalName().isPresent() ? authenticationContext.getPrincipalName().get() : "";
     }
 }

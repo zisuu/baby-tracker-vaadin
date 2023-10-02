@@ -2,6 +2,7 @@ package ch.finecloud.babytracker.data.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -39,9 +40,10 @@ public class UserAccount extends AbstractEntity implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-//    @JsonManagedReference
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "userAccount", cascade = CascadeType.PERSIST)
-//    private Set<Baby> babies = new HashSet<>();
+
+    @OneToMany(mappedBy = "userAccount")
+    @Nullable
+    private List<Baby> babies = new LinkedList<>();
 
     public String getEmail() {
         return email;
@@ -68,6 +70,14 @@ public class UserAccount extends AbstractEntity implements UserDetails {
         this.role = role;
     }
 
+    @Nullable
+    public List<Baby> getBabies() {
+        return babies;
+    }
+
+    public void setBabies(@Nullable List<Baby> babies) {
+        this.babies = babies;
+    }
 
     @Override
     public String getUsername() {

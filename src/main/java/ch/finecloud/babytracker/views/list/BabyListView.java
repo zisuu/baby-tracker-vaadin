@@ -60,13 +60,13 @@ public class BabyListView extends VerticalLayout {
     }
 
     private void saveBaby(BabyForm.SaveBaby baby) {
-        service.saveBaby(baby.getBaby());
+        service.saveBaby(baby.getBaby(), getEmail());
         updateList();
         closeBabyEditor();
     }
 
     private void deleteBaby(BabyForm.DeleteBaby baby) {
-        service.deleteBaby(baby.getBaby());
+        service.deleteBaby(baby.getBaby(), getEmail());
         updateList();
         closeBabyEditor();
     }

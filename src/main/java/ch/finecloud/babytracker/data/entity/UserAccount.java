@@ -4,10 +4,7 @@ package ch.finecloud.babytracker.data.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -27,11 +24,10 @@ public class UserAccount extends AbstractEntity implements UserDetails {
 //    @JdbcTypeCode(SqlTypes.CHAR)
 //    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
 //    private UUID id;
-    @NotNull
-    @NotBlank
+    @Email
+    @NotEmpty
     @Size(max = 50)
     @Column(length = 50)
-    @Email
     private String email;
     @NotNull
     @NotBlank

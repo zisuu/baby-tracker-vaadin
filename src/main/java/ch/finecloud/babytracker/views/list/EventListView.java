@@ -69,7 +69,7 @@ public class EventListView extends VerticalLayout {
     }
 
     private void deleteEvent(EventForm.DeleteEvent event) {
-        service.deleteEvent(event.getEvent());
+        service.deleteEvent(event.getEvent(), getEmail());
         updateList();
         closeEditor();
     }

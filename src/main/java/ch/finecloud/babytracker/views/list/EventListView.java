@@ -7,10 +7,13 @@ import ch.finecloud.babytracker.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -83,10 +86,8 @@ public class EventListView extends VerticalLayout {
         grid.addColumn("startDate");
         grid.addColumn("endDate");
         grid.addColumn("notes");
-        grid.addColumn(event -> {
-            Status status = event.getStatus();
-            return status != null ? status.getDisplayName() : "";
-        }).setHeader("Status");
+        grid.addColumn(createStatusComponentRenderer()).setHeader("Status")
+                .setAutoWidth(true);
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(event ->
@@ -135,5 +136,24 @@ public class EventListView extends VerticalLayout {
 
     private String getEmail() {
         return authenticationContext.getPrincipalName().isPresent() ? authenticationContext.getPrincipalName().get() : "";
+    }
+
+    private static final SerializableBiConsumer<Span, Event> statusComponentUpdater = (
+            span, event) -> {
+        String theme = "";
+        if (event.getStatus() == null) {
+            event.setStatus(Status.COMPLETED);
+        }
+        theme = switch (event.getStatus()) {
+            case COMPLETED -> "badge success";
+            case INTERRUPTED -> "badge error";
+            default -> "badge";
+        };
+        span.getElement().setAttribute("theme", theme);
+        span.setText(event.getStatus().getDisplayName());
+    };
+
+    private static ComponentRenderer<Span, Event> createStatusComponentRenderer() {
+        return new ComponentRenderer<>(Span::new, statusComponentUpdater);
     }
 }

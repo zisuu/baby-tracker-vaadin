@@ -37,7 +37,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		login.setForgotPasswordButtonVisible(false);
 		login.setAction("login");
 		add(new H1("Baby Tracker"));
-		add(new H6("version 0.0.6"), login, register, toggleButton);
+		add(new H6("version 0.0.7"), login, register, toggleButton);
 	}
 
 	@Override

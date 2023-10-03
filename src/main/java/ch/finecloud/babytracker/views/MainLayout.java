@@ -48,8 +48,8 @@ public class MainLayout extends AppLayout {
 
     private void createDrawer() {
         addToDrawer(new VerticalLayout(
-                new RouterLink("Baby List", BabyListView.class),
-                new RouterLink("Event List", EventListView.class)
+                new RouterLink("My Babies", BabyListView.class),
+                new RouterLink("My Events", EventListView.class)
 //                new RouterLink("Dashboard", DashboardView.class)
         ));
     }

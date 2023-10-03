@@ -112,10 +112,12 @@ public class RegistrationFormBinder {
      */
     private void showSuccess(UserAccount userBean) {
         Notification notification =
-                Notification.show("Data saved, welcome " + userBean.getEmail());
+                Notification.show("Data saved, welcome " + userBean.getEmail() + ". You can now login.");
         notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
-        // Here you'd typically redirect the user to another view
+        // redirect the user to login
+        registrationForm.getUI().ifPresent(ui -> ui.navigate("login"));
+
     }
 
 }

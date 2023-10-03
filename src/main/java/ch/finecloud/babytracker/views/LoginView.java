@@ -2,6 +2,7 @@ package ch.finecloud.babytracker.views;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.login.LoginForm;
@@ -19,7 +20,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 	private final LoginForm login = new LoginForm();
 
 	public LoginView(){
-		Button register = new Button("Register new User Account", event -> UI.getCurrent().navigate("useraccountform"));
+		Button register = new Button("Register new User Account", event -> UI.getCurrent().navigate("registeruseraccount"));
 		Button toggleButton = new Button("Dark mode", click -> {
 			ThemeList themeList = UI.getCurrent().getElement().getThemeList();
 
@@ -36,7 +37,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		login.setForgotPasswordButtonVisible(false);
 		login.setAction("login");
 		add(new H1("Baby Tracker"));
-		add(new H6("version 0.0.4"), login, register, toggleButton);
+		add(new H6("version 0.0.5"), login, register, toggleButton);
 	}
 
 	@Override

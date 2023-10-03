@@ -21,9 +21,10 @@ public class RegistrationForm extends FormLayout {
     private Span errorMessageField;
 
     private Button submitButton;
+    private Button backToLoginButton;
 
     public RegistrationForm() {
-        title = new H3("Signup form");
+        title = new H3("Register new User Account");
         email = new EmailField("Email");
         password = new PasswordField("Password");
         passwordConfirm = new PasswordField("Confirm password");
@@ -33,12 +34,13 @@ public class RegistrationForm extends FormLayout {
 
         errorMessageField = new Span();
 
-        submitButton = new Button("Join the community");
+        submitButton = new Button("Join the Baby Tracker");
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
+        backToLoginButton = new Button("Back to Login", event -> UI.getCurrent().navigate("login"));
+        backToLoginButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         add(title, email, password,
                 passwordConfirm, errorMessageField,
-                submitButton);
+                submitButton, backToLoginButton);
 
         // Max width of the Form
         setMaxWidth("500px");
@@ -55,6 +57,7 @@ public class RegistrationForm extends FormLayout {
         setColspan(email, 2);
         setColspan(errorMessageField, 2);
         setColspan(submitButton, 2);
+        setColspan(backToLoginButton, 2);
     }
 
     public PasswordField getPassword() { return password; }

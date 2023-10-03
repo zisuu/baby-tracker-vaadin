@@ -15,9 +15,11 @@ public class SecurityConfig extends VaadinWebSecurity { // <2>
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth ->
-                auth.requestMatchers(
-                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());  // <3>
+                auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());  // <3>
         super.configure(http);
         setLoginView(http, LoginView.class); // <4>
+        // uncomment next two lines if you dont need h2-console
+//        http.csrf().disable();
+//        http.headers().frameOptions().disable();
     }
 }

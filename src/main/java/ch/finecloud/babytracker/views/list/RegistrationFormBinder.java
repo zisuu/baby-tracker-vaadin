@@ -63,7 +63,14 @@ public class RegistrationFormBinder {
                 binder.writeBean(userBean);
 
                 userBean.setRole(Role.USER);
-                babyTrackerService.addUserAccount(userBean.getEmail(), passwordEncoder.encode(userBean.getPassword()));
+                if (babyTrackerService.checkIfUserExists(userBean.getEmail())) {
+                    Notification notification =
+                            Notification.show("User with email " + userBean.getEmail() + " already exists.");
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    return;
+                } else {
+                    babyTrackerService.addUserAccount(userBean.getEmail(), passwordEncoder.encode(userBean.getPassword()));
+                }
 
                 // Show success message if everything went well
                 showSuccess(userBean);

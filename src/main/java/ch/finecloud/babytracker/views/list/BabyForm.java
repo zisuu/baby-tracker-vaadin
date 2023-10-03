@@ -15,6 +15,8 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 public class BabyForm extends FormLayout {
@@ -27,6 +29,9 @@ public class BabyForm extends FormLayout {
     Binder<Baby> binder = new BeanValidationBinder<>(Baby.class);
 
     public BabyForm(List<Baby> babies) {
+        birthday.setLabel("Birthday");
+        LocalDate now = LocalDate.now(ZoneId.systemDefault());
+        birthday.setMax(now);
         addClassName("baby-form");
         binder.bindInstanceFields(this);
         add(name,
@@ -55,7 +60,6 @@ public class BabyForm extends FormLayout {
             fireEvent(new SaveBaby(this, binder.getBean())); // <6>
         }
     }
-
 
     public void setBaby(Baby baby) {
         binder.setBean(baby); // <1>

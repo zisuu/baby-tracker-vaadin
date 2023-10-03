@@ -124,4 +124,8 @@ public class BabyTrackerService {
         }
         return savedUserAccount.getEmail();
     }
+
+    public boolean checkIfUserExists(String email) {
+        return userAccountRepository.findUserAccountByEmail(email).isPresent();
+    }
 }

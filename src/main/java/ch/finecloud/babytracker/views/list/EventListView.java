@@ -1,9 +1,11 @@
 package ch.finecloud.babytracker.views.list;
 
 import ch.finecloud.babytracker.data.entity.Event;
+import ch.finecloud.babytracker.data.entity.EventType;
 import ch.finecloud.babytracker.data.entity.Status;
 import ch.finecloud.babytracker.data.service.BabyTrackerService;
 import ch.finecloud.babytracker.views.MainLayout;
+import com.helger.commons.codec.IDecoder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -12,6 +14,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.data.renderer.LitRenderer;
+import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.PageTitle;
@@ -20,8 +24,6 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.context.annotation.Scope;
-
-import java.security.Principal;
 
 @SpringComponent
 @Scope("prototype")
@@ -82,7 +84,8 @@ public class EventListView extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns();
         grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby");
-        grid.addColumn(event -> event.getEventType().getDisplayName()).setHeader("Event Type");
+        grid.addColumn(createEventTypeRenderer()).setHeader("Event Type")
+                .setAutoWidth(true).setFlexGrow(0);
         grid.addColumn("startDate");
         grid.addColumn("endDate");
         grid.addColumn("notes");
@@ -92,6 +95,18 @@ public class EventListView extends VerticalLayout {
 
         grid.asSingleSelect().addValueChangeListener(event ->
                 editEvent(event.getValue()));
+    }
+
+    private static Renderer<Event> createEventTypeRenderer() {
+        return LitRenderer.<Event> of(
+                        "<vaadin-horizontal-layout style=\"align-items: center;\" theme=\"spacing\">"
+                                + "<vaadin-avatar img=\"${item.pictureUrl}\" name=\"${item.fullName}\" alt=\"User avatar\"></vaadin-avatar>"
+                                + "  <vaadin-vertical-layout style=\"line-height: var(--lumo-line-height-m);\">"
+                                + "    <span> ${item.displayname} </span>"
+                                + "  </vaadin-vertical-layout>"
+                                + "</vaadin-horizontal-layout>")
+                .withProperty("pictureUrl", event -> event.getEventType().getPictureUrl())
+                .withProperty("displayname", event -> event.getEventType().getDisplayName());
     }
 
     private Component getToolbar() {

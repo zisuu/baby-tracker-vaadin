@@ -154,6 +154,23 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            if you want to build a docker image-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-image</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <image>
+                        <name>baby-tracker</name>
+                    </image>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

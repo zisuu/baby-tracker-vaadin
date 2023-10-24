@@ -1,0 +1,5 @@
+"row","eventType","startDate","endDate","notes","status"
+1,CRYING,2023-09-09T14:09:00,2023-09-09T15:09:00,"Baby was crying for 10 minutes, then fell asleep.","COMPLETED"
+2,BEDTIME,2014-03-14T23:22:30,2014-03-14T23:22:30,"Baby fell asleep after 10 minutes of rocking.","COMPLETED"
+3,BREAST_FEEDING,2011-08-01T07:26:25,2011-08-01T07:26:25,"Baby drank 4oz of milk, and fell asleep.","COMPLETED"
+4,BATH,1982-07-10T01:27:56,1982-07-10T01:27:56,"Baby enjoyed the warm bath, splashing and giggling.","COMPLETED"

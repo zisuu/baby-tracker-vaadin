@@ -7,6 +7,9 @@ import ch.finecloud.babytracker.data.entity.UserAccount;
 import ch.finecloud.babytracker.data.repository.BabyRepository;
 import ch.finecloud.babytracker.data.repository.EventRepository;
 import ch.finecloud.babytracker.data.repository.UserAccountRepository;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +19,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class BabyTrackerService {
 
     private final EventRepository eventRepository;
     private final BabyRepository babyRepository;
     private final UserAccountRepository userAccountRepository;
-
-    public BabyTrackerService(EventRepository eventRepository,
-                              BabyRepository babyRepository, UserAccountRepository userAccountRepository) {
-        this.eventRepository = eventRepository;
-        this.babyRepository = babyRepository;
-        this.userAccountRepository = userAccountRepository;
-    }
 
 //    @PreAuthorize("hasRole('ADMIN')")
 //    public List<Event> findAllEvents(String stringFilter) {

@@ -18,9 +18,11 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private final LoginForm login = new LoginForm();
+	private H1 viewTitle;
 
 	public LoginView(){
 		Button register = new Button("Register new User Account", event -> UI.getCurrent().navigate("registeruseraccount"));
+		register.setId("registerButton");
 		Button toggleButton = new Button("Dark mode", click -> {
 			ThemeList themeList = UI.getCurrent().getElement().getThemeList();
 
@@ -36,7 +38,10 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		setJustifyContentMode(JustifyContentMode.CENTER);
 		login.setForgotPasswordButtonVisible(false);
 		login.setAction("login");
-		add(new H1("Baby Tracker"));
+		viewTitle = new H1();
+		viewTitle.setId("view-title");
+		viewTitle.setText("Baby Tracker");
+		add(viewTitle);
 		add(new H6("version 0.0.10"), login, register, toggleButton);
 	}
 

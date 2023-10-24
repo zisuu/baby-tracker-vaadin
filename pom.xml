@@ -12,7 +12,7 @@
     <properties>
         <java.version>17</java.version>
         <vaadin.version>24.1.12</vaadin.version>
-        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     </properties>
 
     <parent>

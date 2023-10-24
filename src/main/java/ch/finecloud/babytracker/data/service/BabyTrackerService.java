@@ -9,6 +9,7 @@ import ch.finecloud.babytracker.data.repository.EventRepository;
 import ch.finecloud.babytracker.data.repository.UserAccountRepository;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +19,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class BabyTrackerService {
 
     private final EventRepository eventRepository;
     private final BabyRepository babyRepository;
     private final UserAccountRepository userAccountRepository;
-
-    public BabyTrackerService(EventRepository eventRepository,
-                              BabyRepository babyRepository, UserAccountRepository userAccountRepository) {
-        this.eventRepository = eventRepository;
-        this.babyRepository = babyRepository;
-        this.userAccountRepository = userAccountRepository;
-    }
 
 //    @PreAuthorize("hasRole('ADMIN')")
 //    public List<Event> findAllEvents(String stringFilter) {
@@ -81,21 +76,11 @@ public class BabyTrackerService {
 
     @PreAuthorize("hasRole('USER')")
     public List<Baby> findBabyByUserAccount_Email(String stringFilter, String email) {
-        if (checkIfUserHasBabies(email)) {
-            Notification notification =
-                    Notification.show("User with email" + email + " has no babies.");
-            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-            Baby baby = new Baby();
-            baby.setName("No Babies");
-            return List.of(baby);
+        if (stringFilter == null || stringFilter.isEmpty()) {
+            return babyRepository.findBabyByUserAccount_Email(email);
         } else {
-            if (stringFilter == null || stringFilter.isEmpty()) {
-                return babyRepository.findBabyByUserAccount_Email(email);
-            } else {
-                return babyRepository.searchBabiesByUserAccount_Email(stringFilter, email);
-            }
+            return babyRepository.searchBabiesByUserAccount_Email(stringFilter, email);
         }
-
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -139,9 +124,5 @@ public class BabyTrackerService {
 
     public boolean checkIfUserExists(String email) {
         return userAccountRepository.findUserAccountByEmail(email).isPresent();
-    }
-
-    public boolean checkIfUserHasBabies(String email) {
-        return !babyRepository.findBabyByUserAccount_Email(email).isEmpty();
     }
 }

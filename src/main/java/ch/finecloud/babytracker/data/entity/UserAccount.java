@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -16,14 +17,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
-public class UserAccount extends AbstractEntity implements UserDetails {
-//    @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-//    @JdbcTypeCode(SqlTypes.CHAR)
-//    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
-//    private UUID id;
+@NoArgsConstructor
+public class UserAccount implements UserDetails {
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
+    private UUID id;
+    @Version
+    private int version;
     @Email
     @NotEmpty
     @Size(max = 50)
@@ -41,25 +49,9 @@ public class UserAccount extends AbstractEntity implements UserDetails {
     @Nullable
     private List<Baby> babies = new LinkedList<>();
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
     }
 
     public void setRole(Role role) {

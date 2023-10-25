@@ -58,8 +58,8 @@ public class MainLayout extends AppLayout {
 
     private Tabs getTabs() {
         Tabs tabs = new Tabs();
-        tabs.add(createTab(VaadinIcon.USERS, "My Babies", BabyListView.class),
-                createTab(VaadinIcon.LIST, "My Events", EventListView.class));
+        tabs.add(createTab(VaadinIcon.LIST, "My Events", EventListView.class),
+                createTab(VaadinIcon.USERS, "My Babies", BabyListView.class));
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         return tabs;
     }

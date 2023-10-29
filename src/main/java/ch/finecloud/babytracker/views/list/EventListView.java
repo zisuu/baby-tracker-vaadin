@@ -80,15 +80,16 @@ public class EventListView extends VerticalLayout {
     }
 
     private void configureGrid() {
+        grid.setId("eventGrid");
         grid.addClassNames("contact-grid");
         grid.setSizeFull();
         grid.setColumns();
-        grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby");
+        grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby").setAutoWidth(true);
         grid.addColumn(createEventTypeRenderer()).setHeader("Event Type")
                 .setAutoWidth(true).setFlexGrow(0);
-        grid.addColumn("startDate");
-        grid.addColumn("endDate");
-        grid.addColumn("notes");
+        grid.addColumn("startDate").setAutoWidth(true);
+        grid.addColumn("endDate").setAutoWidth(true);
+        grid.addColumn("notes").setAutoWidth(true);
         grid.addColumn(createStatusComponentRenderer()).setHeader("Status")
                 .setAutoWidth(true);
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
@@ -116,6 +117,7 @@ public class EventListView extends VerticalLayout {
         filterText.addValueChangeListener(e -> updateList());
 
         Button addEventButton = new Button("Add event");
+        addEventButton.setId("add-button");
         addEventButton.addClickListener(click -> addEvent());
 
         var toolbar = new HorizontalLayout(filterText, addEventButton);

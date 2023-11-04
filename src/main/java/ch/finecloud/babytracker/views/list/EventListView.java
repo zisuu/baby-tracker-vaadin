@@ -1,11 +1,9 @@
 package ch.finecloud.babytracker.views.list;
 
 import ch.finecloud.babytracker.data.entity.Event;
-import ch.finecloud.babytracker.data.entity.EventType;
 import ch.finecloud.babytracker.data.entity.Status;
 import ch.finecloud.babytracker.data.service.BabyTrackerService;
 import ch.finecloud.babytracker.views.MainLayout;
-import com.helger.commons.codec.IDecoder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -60,7 +58,7 @@ public class EventListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new EventForm(service.findBabyByUserAccount_Email(null, getEmail()));
+        form = new EventForm(service.findBabyByUserAccount_Email(null));
         form.setWidth("25em");
         form.addSaveListener(this::saveEvent); // <1>
         form.addDeleteListener(this::deleteEvent); // <2>
@@ -99,7 +97,7 @@ public class EventListView extends VerticalLayout {
     }
 
     private static Renderer<Event> createEventTypeRenderer() {
-        return LitRenderer.<Event> of(
+        return LitRenderer.<Event>of(
                         "<vaadin-horizontal-layout style=\"align-items: center;\" theme=\"spacing\">"
                                 + "<vaadin-avatar img=\"${item.pictureUrl}\" name=\"${item.fullName}\" alt=\"User avatar\"></vaadin-avatar>"
                                 + "  <vaadin-vertical-layout style=\"line-height: var(--lumo-line-height-m);\">"
@@ -148,7 +146,7 @@ public class EventListView extends VerticalLayout {
 
 
     private void updateList() {
-        grid.setItems(service.findAllEventsByUserAccountEmail(filterText.getValue(), getEmail()));
+        grid.setItems(service.findAllEventsByUserAccountEmail(filterText.getValue()));
     }
 
     private String getEmail() {

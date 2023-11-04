@@ -52,7 +52,7 @@ public class BabyListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        babyForm = new BabyForm(service.findBabyByUserAccount_Email(null, getEmail()));
+        babyForm = new BabyForm(service.findBabyByUserAccount_Email(null));
         babyForm.setWidth("25em");
         babyForm.addSaveListener(this::saveBaby); // <1>
         babyForm.addDeleteListener(this::deleteBaby); // <2>
@@ -60,13 +60,13 @@ public class BabyListView extends VerticalLayout {
     }
 
     private void saveBaby(BabyForm.SaveBaby baby) {
-        service.saveBaby(baby.getBaby(), getEmail());
+        service.saveBaby(baby.getBaby());
         updateList();
         closeBabyEditor();
     }
 
     private void deleteBaby(BabyForm.DeleteBaby baby) {
-        service.deleteBaby(baby.getBaby(), getEmail());
+        service.deleteBaby(baby.getBaby());
         updateList();
         closeBabyEditor();
     }
@@ -118,7 +118,7 @@ public class BabyListView extends VerticalLayout {
 
 
     private void updateList() {
-        grid.setItems(service.findBabyByUserAccount_Email(filterText.getValue(), getEmail()));
+        grid.setItems(service.findBabyByUserAccount_Email(filterText.getValue()));
     }
 
 

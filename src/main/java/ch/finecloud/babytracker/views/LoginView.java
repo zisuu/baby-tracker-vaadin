@@ -42,7 +42,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		viewTitle.setId("view-title");
 		viewTitle.setText("Baby Tracker");
 		add(viewTitle);
-		add(new H6("version 0.0.10"), login, register, toggleButton);
+		add(new H6("version 0.0.11"), login, register, toggleButton);
 	}
 
 	@Override

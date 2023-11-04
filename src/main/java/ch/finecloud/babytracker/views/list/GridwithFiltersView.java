@@ -51,14 +51,12 @@ import java.util.stream.Stream;
 @Uses(Icon.class)
 public class GridwithFiltersView extends Div {
 
-    private final AuthenticationContext authenticationContext;
     private Grid<Event> grid;
 
     private Filters filters;
     private final BabyTrackerService babyTrackerService;
 
-    public GridwithFiltersView(BabyTrackerService babyTrackerService, AuthenticationContext authenticationContext) {
-        this.authenticationContext = authenticationContext;
+    public GridwithFiltersView(BabyTrackerService babyTrackerService) {
         this.babyTrackerService = babyTrackerService;
         setSizeFull();
         addClassNames("gridwith-filters-view");

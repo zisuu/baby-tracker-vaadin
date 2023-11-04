@@ -29,15 +29,6 @@ public class BabyTrackerService {
     private final UserAccountRepository userAccountRepository;
     private final AuthenticationContext authenticationContext;
 
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public List<Event> findAllEvents(String stringFilter) {
-//        if (stringFilter == null || stringFilter.isEmpty()) {
-//            return eventRepository.findAll();
-//        } else {
-//            return eventRepository.search(stringFilter);
-//        }
-//    }
-
     @PreAuthorize("hasRole('USER')")
     public List<Event> findAllEventsByUserAccountEmail(String stringFilter) {
         if (stringFilter == null || stringFilter.isEmpty()) {
@@ -66,11 +57,11 @@ public class BabyTrackerService {
     }
 
     @PreAuthorize("hasRole('USER')")
-    public void deleteEvent(Event event, String email) {
-        if (Objects.equals(event.getBaby().getUserAccount().getEmail(), email)) {
+    public void deleteEvent(Event event) {
+        if (Objects.equals(event.getBaby().getUserAccount().getEmail(), getEmail())) {
             eventRepository.delete(event);
         } else {
-            System.err.println("UserAccount " + email + "is not allowed to delete this event.");
+            System.err.println("UserAccount " + getEmail() + "is not allowed to delete this event.");
         }
     }
 
@@ -82,14 +73,6 @@ public class BabyTrackerService {
         }
         eventRepository.save(event);
     }
-
-//    public List<Baby> findAllBabies(String stringFilter) {
-//        if (stringFilter == null || stringFilter.isEmpty()) {
-//            return babyRepository.findAll();
-//        } else {
-//            return babyRepository.search(stringFilter);
-//        }
-//    }
 
     @PreAuthorize("hasRole('USER')")
     public List<Baby> findBabyByUserAccount_Email(String stringFilter) {

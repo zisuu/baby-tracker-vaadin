@@ -29,15 +29,13 @@ import org.springframework.context.annotation.Scope;
 @Route(value = "", layout = MainLayout.class)
 @PageTitle("Events | Baby Tracker")
 public class EventListView extends VerticalLayout {
-    private final AuthenticationContext authenticationContext;
     Grid<Event> grid = new Grid<>(Event.class);
     TextField filterText = new TextField();
     EventForm form;
-    BabyTrackerService service;
+    BabyTrackerService babyTrackerService;
 
-    public EventListView(BabyTrackerService service, AuthenticationContext authenticationContext) {
-        this.service = service;
-        this.authenticationContext = authenticationContext;
+    public EventListView(BabyTrackerService babyTrackerService, AuthenticationContext authenticationContext) {
+        this.babyTrackerService = babyTrackerService;
         addClassName("list-view");
         setSizeFull();
         configureGrid();
@@ -58,7 +56,7 @@ public class EventListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new EventForm(service.findBabyByUserAccount_Email(null));
+        form = new EventForm(babyTrackerService.findBabyByUserAccount_Email(null));
         form.setWidth("25em");
         form.addSaveListener(this::saveEvent); // <1>
         form.addDeleteListener(this::deleteEvent); // <2>
@@ -66,13 +64,13 @@ public class EventListView extends VerticalLayout {
     }
 
     private void saveEvent(EventForm.SaveEvent event) {
-        service.saveEvent(event.getEvent());
+        babyTrackerService.saveEvent(event.getEvent());
         updateList();
         closeEditor();
     }
 
     private void deleteEvent(EventForm.DeleteEvent event) {
-        service.deleteEvent(event.getEvent(), getEmail());
+        babyTrackerService.deleteEvent(event.getEvent());
         updateList();
         closeEditor();
     }
@@ -146,11 +144,7 @@ public class EventListView extends VerticalLayout {
 
 
     private void updateList() {
-        grid.setItems(service.findAllEventsByUserAccountEmail(filterText.getValue()));
-    }
-
-    private String getEmail() {
-        return authenticationContext.getPrincipalName().isPresent() ? authenticationContext.getPrincipalName().get() : "";
+        grid.setItems(babyTrackerService.findAllEventsByUserAccountEmail(filterText.getValue()));
     }
 
     private static final SerializableBiConsumer<Span, Event> statusComponentUpdater = (

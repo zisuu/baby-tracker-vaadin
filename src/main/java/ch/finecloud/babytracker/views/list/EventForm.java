@@ -40,10 +40,7 @@ public class EventForm extends FormLayout {
         addClassName("event-form");
         binder.bindInstanceFields(this);
         startDate.setLabel("Start date and time");
-        startDate.setStep(Duration.ofMinutes(15));
         endDate.setLabel("End date and time");
-        endDate.setStep(Duration.ofMinutes(15));
-
         startDate.addValueChangeListener(e -> endDate.setMin(e.getValue()));
 
         eventType.setItems(EventType.values());

@@ -23,6 +23,9 @@ import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.context.annotation.Scope;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @SpringComponent
 @Scope("prototype")
 @PermitAll
@@ -139,7 +142,12 @@ public class EventListView extends VerticalLayout {
 
     private void addEvent() {
         grid.asSingleSelect().clear();
-        editEvent(new Event());
+        Event newEvent = new Event();
+        if (!babyTrackerService.findBabyByUserAccount_Email(null).isEmpty()) {
+            newEvent.setBaby(babyTrackerService.findBabyByUserAccount_Email(null).get(0));
+        }
+        newEvent.setStartDate(LocalDateTime.now(ZoneId.systemDefault()));
+        editEvent(newEvent);
     }
 
 

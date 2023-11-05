@@ -81,12 +81,15 @@ public class GridwithFiltersView extends Div {
         Span filtersHeading = new Span("Filters");
         mobileFilters.add(mobileIcon, filtersHeading);
         mobileFilters.setFlexGrow(1, filtersHeading);
+        filters.setVisible(false);
         mobileFilters.addClickListener(e -> {
             if (filters.getClassNames().contains("visible")) {
                 filters.removeClassName("visible");
+                filters.setVisible(false);
                 mobileIcon.getElement().setAttribute("icon", "lumo:plus");
             } else {
                 filters.addClassName("visible");
+                filters.setVisible(true);
                 mobileIcon.getElement().setAttribute("icon", "lumo:minus");
             }
         });

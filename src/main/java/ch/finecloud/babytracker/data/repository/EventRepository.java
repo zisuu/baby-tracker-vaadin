@@ -15,4 +15,6 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
     List<Event> searchEventsByBaby_UserAccount_Email(@Param("searchTerm") String searchTerm, @Param("email") String email);
 
     List<Event> findEventsByBaby_UserAccount_Email(String email);
+
+    long countEventsByBaby_UserAccount_Email(String email);
 }

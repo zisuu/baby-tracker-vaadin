@@ -29,7 +29,7 @@ import java.time.ZoneId;
 @SpringComponent
 @Scope("prototype")
 @PermitAll
-@Route(value = "", layout = MainLayout.class)
+@Route(value = "event-list-view", layout = MainLayout.class)
 @PageTitle("Events | Baby Tracker")
 public class EventListView extends VerticalLayout {
     Grid<Event> grid = new Grid<>(Event.class);

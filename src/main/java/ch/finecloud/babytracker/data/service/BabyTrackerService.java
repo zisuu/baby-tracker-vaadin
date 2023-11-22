@@ -52,8 +52,9 @@ public class BabyTrackerService {
         return eventRepository.findEventsByBaby_UserAccount_Email(email);
     }
 
+    @PreAuthorize("hasRole('USER')")
     public long countEvents() {
-        return eventRepository.count();
+        return eventRepository.countEventsByBaby_UserAccount_Email(getEmail());
     }
 
     @PreAuthorize("hasRole('USER')")

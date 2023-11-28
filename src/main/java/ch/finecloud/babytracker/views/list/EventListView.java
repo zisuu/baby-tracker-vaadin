@@ -19,7 +19,6 @@ import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
-import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.context.annotation.Scope;
 
@@ -37,7 +36,7 @@ public class EventListView extends VerticalLayout {
     EventForm form;
     BabyTrackerService babyTrackerService;
 
-    public EventListView(BabyTrackerService babyTrackerService, AuthenticationContext authenticationContext) {
+    public EventListView(BabyTrackerService babyTrackerService) {
         this.babyTrackerService = babyTrackerService;
         addClassName("list-view");
         setSizeFull();

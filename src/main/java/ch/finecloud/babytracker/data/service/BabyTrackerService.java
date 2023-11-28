@@ -53,8 +53,8 @@ public class BabyTrackerService {
     }
 
     @PreAuthorize("hasRole('USER')")
-    public long countEvents() {
-        return eventRepository.countEventsByBaby_UserAccount_Email(getEmail());
+    public long countEventsByBaby(String babyName) {
+        return eventRepository.countEventsByBaby_UserAccount_EmailAndBabyName(getEmail(), babyName);
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -129,5 +129,9 @@ public class BabyTrackerService {
 
     private String getEmail() {
         return authenticationContext.getPrincipalName().isPresent() ? authenticationContext.getPrincipalName().get() : "";
+    }
+
+    public Event findLatestEventByBaby(String babyName) {
+        return eventRepository.findTopByBaby_NameOrderByStartDateDesc(babyName);
     }
 }

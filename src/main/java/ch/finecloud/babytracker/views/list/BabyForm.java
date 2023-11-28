@@ -25,7 +25,6 @@ public class BabyForm extends FormLayout {
     Button save = new Button("Save");
     Button delete = new Button("Delete");
     Button close = new Button("Cancel");
-    // Other fields omitted
     Binder<Baby> binder = new BeanValidationBinder<>(Baby.class);
 
     public BabyForm(List<Baby> babies) {

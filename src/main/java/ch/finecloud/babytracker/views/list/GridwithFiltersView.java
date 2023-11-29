@@ -5,6 +5,7 @@ import ch.finecloud.babytracker.data.entity.EventType;
 import ch.finecloud.babytracker.data.entity.Status;
 import ch.finecloud.babytracker.data.service.BabyTrackerService;
 import ch.finecloud.babytracker.views.MainLayout;
+import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -48,7 +49,6 @@ import java.util.stream.Stream;
 @PermitAll
 @PageTitle("Grid with Filters")
 @Route(value = "grid-with-filters", layout = MainLayout.class)
-@Uses(Icon.class)
 public class GridwithFiltersView extends Div {
 
     private Grid<Event> grid;
@@ -198,7 +198,7 @@ public class GridwithFiltersView extends Div {
     private Component createGrid() {
         grid = new Grid<>(Event.class, false);
         grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby").setAutoWidth(true);
-        grid.addColumn(createEventTypeRenderer()).setHeader("Event Type")
+        grid.addComponentColumn(event -> generateIcon(event.getEventType().getIconName())).setHeader("Type")
                 .setAutoWidth(true).setFlexGrow(0);
         grid.addColumn("startDate").setAutoWidth(true);
         grid.addColumn("endDate").setAutoWidth(true);
@@ -232,16 +232,9 @@ public class GridwithFiltersView extends Div {
         span.setText(event.getStatus().getDisplayName());
     };
 
-    private static Renderer<Event> createEventTypeRenderer() {
-        return LitRenderer.<Event>of(
-                        "<vaadin-horizontal-layout style=\"align-items: center;\" theme=\"spacing\">"
-                                + "<vaadin-avatar img=\"${item.pictureUrl}\" name=\"${item.fullName}\" alt=\"User avatar\"></vaadin-avatar>"
-                                + "  <vaadin-vertical-layout style=\"line-height: var(--lumo-line-height-m);\">"
-                                + "    <span> ${item.displayname} </span>"
-                                + "  </vaadin-vertical-layout>"
-                                + "</vaadin-horizontal-layout>")
-                .withProperty("pictureUrl", event -> event.getEventType().getPictureUrl())
-                .withProperty("displayname", event -> event.getEventType().getDisplayName());
+    private Icon generateIcon(String iconName) {
+        FontAwesome.Solid icon = FontAwesome.Solid.valueOf(iconName);
+        return icon.create();
     }
 
     private void refreshGrid() {

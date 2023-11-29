@@ -1,27 +1,22 @@
 package ch.finecloud.babytracker.data.entity;
 
+import lombok.Getter;
+
+@Getter
 public enum EventType {
-    // path to svg icons: src/main/resources/META-INF/resources/frontend/icons
-    BOTTLE_FEEDING("Bottle Feeding", "images/bottle-feeding.png"),
-    BREAST_FEEDING("Breast Feeding", "images/breast-feeding.png"),
-    SLEEPING("Sleeping", "images/sleeping.png"),
-    DIAPER("Diaper", "images/diaper.png"),
-    BEDTIME("Bedtime", "images/bedtime.png"),
-    BATHING("Bathing", "images/bathing.png"),
-    CRYING("Crying", "images/crying.png");
+    BOTTLE_FEEDING("Bottle Feeding", "GLASS_WATER"),
+    BREAST_FEEDING("Breast Feeding", "PERSON_BREASTFEEDING"),
+    SLEEPING("Sleeping", "BED"),
+    DIAPER("Diaper", "TOILET_PAPER"),
+    BEDTIME("Bedtime", "STAR"),
+    BATHING("Bathing", "BATH"),
+    CRYING("Crying", "FACE_SAD_CRY");
     private final String displayName;
-    private final String pictureUrl;
+    private final String iconName;
 
-    EventType(String displayName, String pictureUrl) {
+    EventType(String displayName, String iconName) {
         this.displayName = displayName;
-        this.pictureUrl = pictureUrl;
+        this.iconName = iconName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
 }

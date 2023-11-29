@@ -4,16 +4,18 @@ import ch.finecloud.babytracker.data.entity.Event;
 import ch.finecloud.babytracker.data.entity.Status;
 import ch.finecloud.babytracker.data.service.BabyTrackerService;
 import ch.finecloud.babytracker.views.MainLayout;
+import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.renderer.LitRenderer;
-import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.PageTitle;
@@ -83,7 +85,7 @@ public class EventListView extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns();
         grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby").setAutoWidth(true);
-        grid.addColumn(createEventTypeRenderer()).setHeader("Event Type")
+        grid.addComponentColumn(event -> generateIcon(event.getEventType().getIconName())).setHeader("Type")
                 .setAutoWidth(true).setFlexGrow(0);
         grid.addColumn("startDate").setAutoWidth(true);
         grid.addColumn("endDate").setAutoWidth(true);
@@ -91,21 +93,13 @@ public class EventListView extends VerticalLayout {
         grid.addColumn(createStatusComponentRenderer()).setHeader("Status")
                 .setAutoWidth(true);
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
-
         grid.asSingleSelect().addValueChangeListener(event ->
                 editEvent(event.getValue()));
     }
 
-    private static Renderer<Event> createEventTypeRenderer() {
-        return LitRenderer.<Event>of(
-                        "<vaadin-horizontal-layout style=\"align-items: center;\" theme=\"spacing\">"
-                                + "<vaadin-avatar img=\"${item.pictureUrl}\" name=\"${item.fullName}\" alt=\"User avatar\"></vaadin-avatar>"
-                                + "  <vaadin-vertical-layout style=\"line-height: var(--lumo-line-height-m);\">"
-                                + "    <span> ${item.displayname} </span>"
-                                + "  </vaadin-vertical-layout>"
-                                + "</vaadin-horizontal-layout>")
-                .withProperty("pictureUrl", event -> event.getEventType().getPictureUrl())
-                .withProperty("displayname", event -> event.getEventType().getDisplayName());
+    private Icon generateIcon(String iconName) {
+        FontAwesome.Solid icon = FontAwesome.Solid.valueOf(iconName);
+        return icon.create();
     }
 
     private Component getToolbar() {

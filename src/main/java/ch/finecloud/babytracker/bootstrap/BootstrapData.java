@@ -94,7 +94,6 @@ public class BootstrapData implements CommandLineRunner {
 //    }
 
     private void loadUserAccountData() {
-        // TODO: add roles to those users and those in the CSV file
         if (userAccountRepository.count() == 0) {
             UserAccount userAccount1 = UserAccount.builder()
                     .id(UUID.randomUUID())

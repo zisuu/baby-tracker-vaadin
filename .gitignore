@@ -6,6 +6,10 @@
 .mvn
 *.iml
 .DS_Store
+*.ts
+package.json
+package-lock.json
+tsconfig.json
 
 # The following files are generated/updated by vaadin-maven-plugin
 node_modules/

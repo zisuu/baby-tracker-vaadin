@@ -2,6 +2,7 @@ package ch.finecloud.babytracker.views;
 
 import ch.finecloud.babytracker.data.entity.*;
 import ch.finecloud.babytracker.data.service.BabyTrackerService;
+import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -25,8 +26,8 @@ import java.util.List;
 public class DashboardView extends VerticalLayout {
     private final BabyTrackerService service;
     ComboBox<String> selectedBaby = new ComboBox<>("Select a baby");
-    Button startSleepButton = new Button("Start Sleeping");
-    Button stopAndSaveButton = new Button("Stop Sleeping");
+    Button startSleepButton = new Button("Start Sleeping", FontAwesome.Solid.BED.create());
+    Button stopAndSaveButton = new Button("Stop Sleeping", FontAwesome.Solid.BED.create());
     LocalDateTime startTime;
     Span elapsedTime = new Span();
     private Duration initialDuration;
@@ -100,7 +101,7 @@ public class DashboardView extends VerticalLayout {
 
             // Update stats with initial duration
             if (initialDuration != null) {
-                String value = "Your Baby " + babyName + " is sleeping since " + initialDuration.toHours() +
+                String value = babyName + " is sleeping since " + initialDuration.toHours() +
                         " hours and " + (initialDuration.toMinutes() % 60) + " minutes and " + initialDuration.toSeconds() % 60 + " seconds";
                 elapsedTime.add(value);
                 add(elapsedTime);

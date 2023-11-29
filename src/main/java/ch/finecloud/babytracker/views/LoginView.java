@@ -1,8 +1,8 @@
 package ch.finecloud.babytracker.views;
 
+import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.login.LoginForm;
@@ -41,8 +41,9 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		viewTitle = new H1();
 		viewTitle.setId("view-title");
 		viewTitle.setText("Baby Tracker");
+		add(FontAwesome.Solid.BABY.create());
 		add(viewTitle);
-		add(new H6("version 0.0.15"), login, register, toggleButton);
+		add(new H6("version 0.0.16"), login, register, toggleButton);
 	}
 
 	@Override

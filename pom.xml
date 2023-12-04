@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.finecloud</groupId>
     <artifactId>baby-tracker</artifactId>
-    <version>0.0.16</version>
+    <version>0.0.18</version>
     <name>baby-tracker</name>
     <description>baby-tracker</description>
     <packaging>jar</packaging>
@@ -91,6 +91,11 @@
             <groupId>com.flowingcode.addons</groupId>
             <artifactId>font-awesome-iron-iconset</artifactId>
             <version>5.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>apexcharts</artifactId>
+            <version>23.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.parttio</groupId>

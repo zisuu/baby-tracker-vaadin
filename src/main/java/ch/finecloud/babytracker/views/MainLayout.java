@@ -2,6 +2,7 @@ package ch.finecloud.babytracker.views;
 
 import ch.finecloud.babytracker.security.SecurityService;
 import ch.finecloud.babytracker.views.list.BabyListView;
+import ch.finecloud.babytracker.views.list.ChartView;
 import ch.finecloud.babytracker.views.list.EventListView;
 import ch.finecloud.babytracker.views.list.GridwithFiltersView;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -62,6 +63,7 @@ public class MainLayout extends AppLayout {
         tabs.add(createTab(VaadinIcon.HOME, "Dashboard", DashboardView.class),
                 createTab(VaadinIcon.LIST, "My Events", EventListView.class),
                 createTab(VaadinIcon.USERS, "My Babies", BabyListView.class),
+                createTab(VaadinIcon.COGS, "Charts", ChartView.class),
                 createTab(VaadinIcon.FILTER, "Event Filters", GridwithFiltersView.class));
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         return tabs;

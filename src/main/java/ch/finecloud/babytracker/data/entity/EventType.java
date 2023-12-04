@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public enum EventType {
-    BOTTLE_FEEDING("Bottle Feeding", "GLASS_WATER"),
+    BOTTLE_FEEDING("Bottle Feeding", "BOTTLE_WATER"),
     BREAST_FEEDING("Breast Feeding", "PERSON_BREASTFEEDING"),
     SLEEPING("Sleeping", "BED"),
     DIAPER("Diaper", "TOILET_PAPER"),
-    BEDTIME("Bedtime", "STAR"),
+    BEDTIME("Bedtime", "BABY_CARRIAGE"),
     BATHING("Bathing", "BATH"),
     CRYING("Crying", "FACE_SAD_CRY");
     private final String displayName;

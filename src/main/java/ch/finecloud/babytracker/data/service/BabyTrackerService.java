@@ -1,5 +1,7 @@
 package ch.finecloud.babytracker.data.service;
 
+import ch.finecloud.babytracker.data.dto.BabySleepPerDay;
+import ch.finecloud.babytracker.data.dto.EventTypeNumber;
 import ch.finecloud.babytracker.data.entity.*;
 import ch.finecloud.babytracker.data.repository.BabyRepository;
 import ch.finecloud.babytracker.data.repository.EventRepository;
@@ -16,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -107,6 +110,16 @@ public class BabyTrackerService {
         } else {
             System.err.println("UserAccount " + getEmail() + "is not allowed to delete this baby.");
         }
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    public List<EventTypeNumber> numberOfEventsPerEventType() {
+        return eventRepository.numberOfEventsPerEventType(getEmail());
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    public List<BabySleepPerDay> findBabySleepPerDay() {
+        return eventRepository.findBabySleepPerDay(getEmail(), LocalDateTime.now().minusDays(7));
     }
 
     public String addUserAccount(String email, String password) {

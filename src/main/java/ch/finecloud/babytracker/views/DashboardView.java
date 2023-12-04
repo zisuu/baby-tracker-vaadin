@@ -38,6 +38,7 @@ public class DashboardView extends VerticalLayout {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
         List<String> babyByUserAccountEmail = service.findBabyByUserAccount_Email(null).stream().map(Baby::getName).toList();
+        selectedBaby.setId("selectedBabyComboBox");
         selectedBaby.setItems(babyByUserAccountEmail);
         selectedBaby.setValue(babyByUserAccountEmail.get(0));
 

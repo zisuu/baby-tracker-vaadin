@@ -1,16 +1,15 @@
 package ch.finecloud.babytracker.views.list;
 
-import ch.finecloud.babytracker.data.entity.Event;
-import ch.finecloud.babytracker.data.entity.EventType;
+import ch.finecloud.babytracker.TestBabyTrackerApplication;
+import ch.finecloud.babytracker.bootstrap.BootstrapData;
+import ch.finecloud.babytracker.service.csv.BabyCsvService;
+import ch.finecloud.babytracker.service.csv.EventCsvService;
+import ch.finecloud.babytracker.service.csv.UserCsvService;
 import com.github.mvysny.kaributesting.mockhttp.MockRequest;
-import com.github.mvysny.kaributesting.v10.GridKt;
 import com.github.mvysny.kaributesting.v10.MockVaadin;
 import com.github.mvysny.kaributesting.v10.Routes;
 import com.github.mvysny.kaributesting.v10.spring.MockSpringServlet;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.spring.SpringServlet;
 import kotlin.jvm.functions.Function0;
@@ -18,9 +17,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -36,6 +36,8 @@ import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Import({TestBabyTrackerApplication.class, BootstrapData.class, BabyCsvService.class, UserCsvService.class, EventCsvService.class})
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public abstract class KaribuTest {
 
     private static Routes routes;

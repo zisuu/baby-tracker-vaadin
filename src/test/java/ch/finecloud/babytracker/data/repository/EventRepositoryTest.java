@@ -3,7 +3,8 @@ package ch.finecloud.babytracker.data.repository;
 import ch.finecloud.babytracker.TestBabyTrackerApplication;
 import ch.finecloud.babytracker.bootstrap.BootstrapData;
 import ch.finecloud.babytracker.config.TestConfig;
-import ch.finecloud.babytracker.data.entity.Baby;
+import ch.finecloud.babytracker.data.dto.EventTypeNumber;
+import ch.finecloud.babytracker.data.entity.Event;
 import ch.finecloud.babytracker.service.csv.BabyCsvService;
 import ch.finecloud.babytracker.service.csv.EventCsvService;
 import ch.finecloud.babytracker.service.csv.UserCsvService;
@@ -24,39 +25,30 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Import({TestBabyTrackerApplication.class, BootstrapData.class, TestConfig.class, BabyCsvService.class, UserCsvService.class, EventCsvService.class})
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class BabyRepositoryTest {
+class EventRepositoryTest {
 
     @Autowired
-    private BabyRepository babyRepository;
+    private EventRepository eventRepository;
 
-    private Baby baby;
+    private Event event;
 
     @BeforeEach
     void setUp() {
-        baby = getRandomBaby();
+        event = getRandomEvent();
     }
 
-    private Baby getRandomBaby() {
-        long count = babyRepository.count();
+    private Event getRandomEvent() {
+        long count = eventRepository.count();
         assertThat(count).isPositive();
         int randomIndex = new Random().nextInt((int) count);
-        Slice<Baby> babySlice = babyRepository.findAll(PageRequest.of(randomIndex, 1));
-        return babySlice.getContent().get(0);
+        Slice<Event> eventSlice = eventRepository.findAll(PageRequest.of(randomIndex, 1));
+        return eventSlice.getContent().get(0);
     }
 
     @Test
-    void searchBabiesByUserAccount_Email() {
-        assertThat(baby).isNotNull();
-        List<Baby> babies = babyRepository.searchBabiesByUserAccount_Email(baby.getName(), baby.getUserAccount().getEmail());
-        assertThat(babies).isNotNull();
-        assertThat(babies.stream().anyMatch(baby -> baby.getName().equals(this.baby.getName()))).isTrue();
+    void numberOfEventsPerEventType() {
+        List<EventTypeNumber> eventTypeNumbers = eventRepository.numberOfEventsPerEventType(event.getBaby().getUserAccount().getEmail());
+        assertThat(eventTypeNumbers).isNotNull();
     }
 
-    @Test
-    void findBabyByUserAccount_Email() {
-        assertThat(baby).isNotNull();
-        List<Baby> babies = babyRepository.findBabyByUserAccount_Email(this.baby.getUserAccount().getEmail());
-        assertThat(babies).isNotNull();
-        assertThat(babies.stream().anyMatch(baby -> baby.getName().equals(this.baby.getName()))).isTrue();
-    }
 }

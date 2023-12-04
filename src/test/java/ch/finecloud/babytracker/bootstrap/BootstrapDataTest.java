@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @Import({TestBabyTrackerApplication.class, UserCsvService.class, BabyCsvService.class, EventCsvService.class, TestConfig.class})

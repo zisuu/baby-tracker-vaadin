@@ -3,9 +3,6 @@ package ch.finecloud.babytracker.data.repository;
 import ch.finecloud.babytracker.data.dto.BabySleepPerDay;
 import ch.finecloud.babytracker.data.dto.EventTypeNumber;
 import ch.finecloud.babytracker.data.entity.Event;
-import ch.finecloud.babytracker.data.entity.EventType;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -41,14 +38,16 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
     List<EventTypeNumber> numberOfEventsPerEventType(@Param("email") String email);
 
     @Query("""
-            SELECT new ch.finecloud.babytracker.data.dto.BabySleepPerDay(
-                DATE(e.startDate),
-                CAST(FUNCTION('TIME_TO_SEC', FUNCTION('TIMEDIFF', e.endDate, e.startDate)) AS java.lang.Long)
-            )
-            FROM Event e
-            WHERE e.eventType = 'SLEEPING'
-            AND e.baby.userAccount.email = :email
-            AND e.startDate >= :startDate
+                SELECT new ch.finecloud.babytracker.data.dto.BabySleepPerDay(
+                    DATE(e.startDate),
+                    CAST(FUNCTION('TIME_TO_SEC', FUNCTION('TIMEDIFF', MAX(e.endDate), MIN(e.startDate))) AS java.lang.Long)
+                )
+                FROM Event e
+                WHERE e.eventType = 'SLEEPING'
+                AND e.baby.userAccount.email = :email
+                AND e.startDate >= :startDate
+                GROUP BY DATE(e.startDate)
+                ORDER BY DATE(e.startDate) ASC
             """)
     List<BabySleepPerDay> findBabySleepPerDay(@Param("email") String email, @Param("startDate") LocalDateTime startDate);
 }

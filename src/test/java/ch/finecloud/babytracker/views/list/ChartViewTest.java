@@ -3,6 +3,7 @@ package ch.finecloud.babytracker.views.list;
 import ch.finecloud.babytracker.data.dto.BabySleepPerDay;
 import ch.finecloud.babytracker.data.dto.EventTypeNumber;
 import ch.finecloud.babytracker.data.entity.Role;
+import ch.finecloud.babytracker.views.chart.VerticalBarChart;
 import com.vaadin.flow.component.UI;
 import org.junit.jupiter.api.Test;
 
@@ -42,8 +43,8 @@ class ChartViewTest extends KaribuTest {
     void testIfChart2CanBeDisplayed() {
         login("userAccount1@example.com", "password1", List.of(Role.USER.name()));
         Optional<ChartView> chartView = UI.getCurrent().navigate(ChartView.class);
-        VerticalBarChartExample2 verticalBarChartExample2 = chartView.get().verticalBarChartExample2;
-        assertThat(verticalBarChartExample2).isNotNull();
+        VerticalBarChart verticalBarChart = chartView.get().verticalBarChart;
+        assertThat(verticalBarChart).isNotNull();
     }
 }
 

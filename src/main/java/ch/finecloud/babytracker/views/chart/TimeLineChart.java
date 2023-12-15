@@ -9,24 +9,38 @@ import com.github.appreciated.apexcharts.config.xaxis.XAxisType;
 import com.github.appreciated.apexcharts.helper.DateCoordinate;
 import com.github.appreciated.apexcharts.helper.Series;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TimeLineChart extends ApexChartsBuilder {
     public TimeLineChart(List<Event> allEvents) {
         List<DateCoordinate> dateCoordinates = new ArrayList<>();
-        // filter all events out that have null endDate or startDate
-        allEvents.removeIf(event -> event.getEndDate() == null || event.getStartDate() == null);
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime last24Hours = now.minusHours(24);
 
         for (Event event : allEvents) {
             LocalDateTime startDate = event.getStartDate();
             LocalDateTime endDate = event.getEndDate();
-            String eventName = event.getEventType().name(); // You can use a more appropriate field here
 
-            DateCoordinate dateCoordinate = new DateCoordinate(eventName, startDate.toLocalDate(), endDate.toLocalDate());
-            dateCoordinates.add(dateCoordinate);
+            // Skip events with NULL end_date
+            if (endDate == null) {
+                continue;
+            }
+
+            // Only include events within the last 24 hours
+            if (startDate.isAfter(last24Hours) || endDate.isAfter(last24Hours)) {
+                String eventName = event.getEventType().name(); // You can use a more appropriate field here
+
+                DateCoordinate dateCoordinate = new DateCoordinate(
+                        eventName,
+                        startDate.toInstant(ZoneOffset.UTC).toEpochMilli(),
+                        endDate.toInstant(ZoneOffset.UTC).toEpochMilli()
+                );
+
+                dateCoordinates.add(dateCoordinate);
+            }
         }
 
         Series<DateCoordinate> series = new Series<>(dateCoordinates.toArray(new DateCoordinate[0]));
@@ -45,8 +59,8 @@ public class TimeLineChart extends ApexChartsBuilder {
                         .build())
                 .withSeries(series)
                 .withYaxis(YAxisBuilder.get()
-                        .withMin(LocalDate.now().minusDays(30)) // You may need to calculate the appropriate min and max
-                        .withMax(LocalDate.now())
+                        .withMin(last24Hours.toInstant(ZoneOffset.UTC).toEpochMilli())
+                        .withMax(now.toInstant(ZoneOffset.UTC).toEpochMilli())
                         .build())
                 .withXaxis(XAxisBuilder.get()
                         .withType(XAxisType.DATETIME)

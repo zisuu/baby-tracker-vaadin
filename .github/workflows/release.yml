@@ -5,9 +5,9 @@ name: Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}

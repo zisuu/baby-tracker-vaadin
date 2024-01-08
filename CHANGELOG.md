@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.0.1](https://github.com/zisuu/baby-tracker-v2/compare/v1.0.0...v1.0.1) (2024-01-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.github.appreciated:apexcharts to v24 ([3d4d7e0](https://github.com/zisuu/baby-tracker-v2/commit/3d4d7e009c79b71d7ff02a7a017896d5078e256c))
+
 # 1.0.0 (2023-12-19)
 
 

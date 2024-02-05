@@ -202,7 +202,7 @@ public class GridwithFiltersView extends Div {
         grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby").setAutoWidth(true);
         grid.addComponentColumn(event -> generateIcon(event.getEventType().getIconName())).setHeader("Type")
                 .setAutoWidth(true).setFlexGrow(0);
-        grid.addColumn("startDate").setAutoWidth(true);
+        grid.addColumn(START_DATE).setAutoWidth(true);
         grid.addColumn("endDate").setAutoWidth(true);
         grid.addColumn("notes").setAutoWidth(true);
         grid.addColumn(createStatusComponentRenderer()).setHeader("Status")
@@ -213,7 +213,7 @@ public class GridwithFiltersView extends Div {
         grid.addClassNames(LumoUtility.Border.TOP, LumoUtility.BorderColor.CONTRAST_10);
         // Set initial sorting by startDate in descending order
         List<GridSortOrder<Event>> sortOrders = new ArrayList<>();
-        sortOrders.add(new GridSortOrder<>(grid.getColumnByKey("startDate"), SortDirection.DESCENDING));
+        sortOrders.add(new GridSortOrder<>(grid.getColumnByKey(START_DATE), SortDirection.DESCENDING));
         grid.sort(sortOrders);
 
         return grid;

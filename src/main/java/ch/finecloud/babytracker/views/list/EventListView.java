@@ -7,15 +7,15 @@ import ch.finecloud.babytracker.views.MainLayout;
 import com.flowingcode.vaadin.addons.fontawesome.FontAwesome;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.PageTitle;
@@ -26,6 +26,8 @@ import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringComponent
 @Scope("prototype")
@@ -95,6 +97,10 @@ public class EventListView extends VerticalLayout {
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.asSingleSelect().addValueChangeListener(event ->
                 editEvent(event.getValue()));
+        // Set initial sorting by startDate in descending order
+        List<GridSortOrder<Event>> sortOrders = new ArrayList<>();
+        sortOrders.add(new GridSortOrder<>(grid.getColumnByKey("startDate"), SortDirection.DESCENDING));
+        grid.sort(sortOrders);
     }
 
     private Icon generateIcon(String iconName) {

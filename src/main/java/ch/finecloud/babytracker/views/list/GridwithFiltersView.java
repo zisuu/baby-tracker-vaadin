@@ -63,7 +63,7 @@ public class GridwithFiltersView extends Div {
         setSizeFull();
         addClassNames("gridwith-filters-view");
 
-        filters = new Filters(() -> refreshGrid());
+        filters = new Filters(this::refreshGrid);
         VerticalLayout layout = new VerticalLayout(createMobileFilters(), filters, createGrid());
         layout.setSizeFull();
         layout.setPadding(false);

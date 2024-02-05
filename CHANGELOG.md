@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.1.0](https://github.com/zisuu/baby-tracker-v2/compare/v1.0.1...v1.1.0) (2024-02-05)
+
+
+### Features
+
+* add default sorting by startDate for Events in all Views ([c89734e](https://github.com/zisuu/baby-tracker-v2/commit/c89734e80768be775645a2b5cb74205b766da728))
+
 ## [1.0.1](https://github.com/zisuu/baby-tracker-v2/compare/v1.0.0...v1.0.1) (2024-01-08)
 
 

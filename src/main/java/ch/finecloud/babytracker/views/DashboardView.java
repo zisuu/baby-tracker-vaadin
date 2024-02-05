@@ -18,6 +18,7 @@ import jakarta.annotation.security.PermitAll;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @PermitAll
@@ -30,7 +31,7 @@ public class DashboardView extends VerticalLayout {
     Button stopAndSaveButton = new Button("Stop Sleeping", FontAwesome.Solid.BED.create());
     LocalDateTime startTime;
     Span elapsedTime = new Span();
-    private Duration initialDuration;
+    Duration initialDuration;
 
     public DashboardView(BabyTrackerService service) {
         this.service = service;
@@ -40,7 +41,11 @@ public class DashboardView extends VerticalLayout {
         List<String> babyByUserAccountEmail = service.findBabyByUserAccount_Email(null).stream().map(Baby::getName).toList();
         selectedBaby.setId("selectedBabyComboBox");
         selectedBaby.setItems(babyByUserAccountEmail);
-        selectedBaby.setValue(babyByUserAccountEmail.get(0));
+        try {
+            selectedBaby.setValue(babyByUserAccountEmail.getFirst());
+        } catch (NoSuchElementException ex) {
+            selectedBaby.setPlaceholder("No baby found");
+        }
 
         selectedBaby.addValueChangeListener(event -> {
             if (event.getValue() != null) {

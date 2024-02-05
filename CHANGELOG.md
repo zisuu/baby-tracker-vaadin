@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.1.1](https://github.com/zisuu/baby-tracker-v2/compare/v1.1.0...v1.1.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* no baby bug ([4a0f8b7](https://github.com/zisuu/baby-tracker-v2/commit/4a0f8b7dac84c537fbd9489959140346e3879a9b))
+
 # [1.1.0](https://github.com/zisuu/baby-tracker-v2/compare/v1.0.1...v1.1.0) (2024-02-05)
 
 

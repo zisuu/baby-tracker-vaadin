@@ -13,7 +13,7 @@ public class TestBabyTrackerApplication {
     @Bean
     @ServiceConnection
     MySQLContainer<?> mysqlContainer() {
-        return new MySQLContainer<>(DockerImageName.parse("mysql:8.2.0"));
+        return new MySQLContainer<>(DockerImageName.parse("mysql:8.0"));
     }
 
     public static void main(String[] args) {

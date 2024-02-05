@@ -13,8 +13,8 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
@@ -24,18 +24,19 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.data.renderer.LitRenderer;
-import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
-import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import jakarta.annotation.security.PermitAll;
-import jakarta.persistence.criteria.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -51,6 +52,7 @@ import java.util.stream.Stream;
 @Route(value = "grid-with-filters", layout = MainLayout.class)
 public class GridwithFiltersView extends Div {
 
+    public static final String START_DATE = "startDate";
     private Grid<Event> grid;
 
     private Filters filters;
@@ -61,7 +63,7 @@ public class GridwithFiltersView extends Div {
         setSizeFull();
         addClassNames("gridwith-filters-view");
 
-        filters = new Filters(() -> refreshGrid());
+        filters = new Filters(this::refreshGrid);
         VerticalLayout layout = new VerticalLayout(createMobileFilters(), filters, createGrid());
         layout.setSizeFull();
         layout.setPadding(false);
@@ -165,7 +167,7 @@ public class GridwithFiltersView extends Div {
                 predicates.add(notesMatch);
             }
             if (startDate.getValue() != null) {
-                String databaseColumn = "startDate";
+                String databaseColumn = START_DATE;
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(databaseColumn),
                         criteriaBuilder.literal(startDate.getValue())));
             }
@@ -200,7 +202,7 @@ public class GridwithFiltersView extends Div {
         grid.addColumn(event -> event.getBaby().getName()).setHeader("Baby").setAutoWidth(true);
         grid.addComponentColumn(event -> generateIcon(event.getEventType().getIconName())).setHeader("Type")
                 .setAutoWidth(true).setFlexGrow(0);
-        grid.addColumn("startDate").setAutoWidth(true);
+        grid.addColumn(START_DATE).setAutoWidth(true);
         grid.addColumn("endDate").setAutoWidth(true);
         grid.addColumn("notes").setAutoWidth(true);
         grid.addColumn(createStatusComponentRenderer()).setHeader("Status")
@@ -209,6 +211,10 @@ public class GridwithFiltersView extends Div {
                 PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query))).stream());
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.addClassNames(LumoUtility.Border.TOP, LumoUtility.BorderColor.CONTRAST_10);
+        // Set initial sorting by startDate in descending order
+        List<GridSortOrder<Event>> sortOrders = new ArrayList<>();
+        sortOrders.add(new GridSortOrder<>(grid.getColumnByKey(START_DATE), SortDirection.DESCENDING));
+        grid.sort(sortOrders);
 
         return grid;
     }

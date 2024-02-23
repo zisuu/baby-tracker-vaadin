@@ -1,21 +1,21 @@
 package ch.finecloud.babytracker.data.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -49,14 +49,6 @@ public class UserAccount implements UserDetails {
     @Nullable
     private List<Baby> babies = new LinkedList<>();
 
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Nullable
     public List<Baby> getBabies() {

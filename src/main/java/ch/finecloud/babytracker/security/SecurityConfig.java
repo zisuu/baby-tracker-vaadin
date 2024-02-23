@@ -8,16 +8,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@EnableWebSecurity // <1>
+@EnableWebSecurity
 @Configuration
-public class SecurityConfig extends VaadinWebSecurity { // <2>
+public class SecurityConfig extends VaadinWebSecurity {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth ->
-                auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());  // <3>
+                auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());
         super.configure(http);
-        setLoginView(http, LoginView.class); // <4>
+        setLoginView(http, LoginView.class);
         // uncomment next two lines if you dont need h2-console
 //        http.csrf().disable();
 //        http.headers().frameOptions().disable();

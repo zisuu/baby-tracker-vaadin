@@ -33,7 +33,6 @@ public class BootstrapData implements CommandLineRunner {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
-    public static final String EMAIL = "userAccount1@example.com";
     private final UserAccountRepository userAccountRepository;
     private final BabyRepository babyRepository;
     private final EventRepository eventRepository;

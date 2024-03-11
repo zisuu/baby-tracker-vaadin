@@ -13,7 +13,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class ChartViewTest extends KaribuTest {
 
-
     @Test
     void testNumberOfEventsPerEventType() {
         login("userAccount1@example.com", "password1", List.of(Role.USER.name()));

@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BabyFormTest {
+class BabyFormTest extends KaribuTest {
     private List<Baby> babies;
     private Baby testBaby;
     private Baby baby1;

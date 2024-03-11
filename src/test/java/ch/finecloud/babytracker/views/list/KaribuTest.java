@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({TestBabyTrackerApplication.class, BootstrapData.class, BabyCsvService.class, UserCsvService.class, EventCsvService.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public abstract class KaribuTest {

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ch.finecloud.babytracker.data.entity.Baby;
@@ -13,7 +14,7 @@ import ch.finecloud.babytracker.data.entity.Status;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class EventFormTest {
+class EventFormTest extends KaribuTest {
     private List<Baby> babies;
     private Event testEvent;
     private Baby baby1;
@@ -41,7 +42,7 @@ public class EventFormTest {
     }
 
     @Test
-    public void formFieldsPopulated() {
+    void formFieldsPopulated() {
         EventForm form = new EventForm(babies);
         form.setEvent(testEvent);
         assertEquals(EventType.BATHING, form.eventType.getValue());
@@ -53,7 +54,7 @@ public class EventFormTest {
     }
 
     @Test
-    public void saveEventHasCorrectValues() {
+    void saveEventHasCorrectValues() {
         EventForm form = new EventForm(babies);
         Event event = new Event();
         form.setEvent(event);

@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.2.0](https://github.com/zisuu/baby-tracker-v2/compare/v1.1.2...v1.2.0) (2024-03-13)
+
+
+### Features
+
+* add spring docker compose and drop h2 ([4316ea8](https://github.com/zisuu/baby-tracker-v2/commit/4316ea85e768e24e56c25e53583e04ce24788e4d))
+
 ## [1.1.2](https://github.com/zisuu/baby-tracker-v2/compare/v1.1.1...v1.1.2) (2024-02-23)
 
 

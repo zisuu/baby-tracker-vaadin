@@ -29,7 +29,7 @@ public class BabyForm extends FormLayout {
 
     public BabyForm(List<Baby> babies) {
         birthday.setLabel("Birthday");
-        LocalDate now = LocalDate.now(ZoneId.systemDefault());
+        LocalDate now = LocalDate.now(ZoneId.of("Europe/Zurich"));
         birthday.setMax(now);
         addClassName("baby-form");
         binder.bindInstanceFields(this);

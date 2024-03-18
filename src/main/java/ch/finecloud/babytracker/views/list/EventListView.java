@@ -145,7 +145,7 @@ public class EventListView extends VerticalLayout {
         if (!babyTrackerService.findBabyByUserAccount_Email(null).isEmpty()) {
             newEvent.setBaby(babyTrackerService.findBabyByUserAccount_Email(null).get(0));
         }
-        newEvent.setStartDate(LocalDateTime.now(ZoneId.systemDefault()));
+        newEvent.setStartDate(LocalDateTime.now(ZoneId.of("Europe/Zurich")));
         editEvent(newEvent);
     }
 

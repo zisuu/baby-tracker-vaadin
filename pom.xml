@@ -191,6 +191,24 @@
                     <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5895</jvmArguments>
                     <wait>500</wait>
                     <maxAttempts>240</maxAttempts>
+                    <!--            if you want to build a docker image-->
+                    <!--                <executions>-->
+                    <!--                    <execution>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>build-image</goal>-->
+                    <!--                        </goals>-->
+                    <!--                    </execution>-->
+                    <!--                </executions>-->
+                    <!--            if you want to build a docker image-->
+                    <!--                    <image>-->
+                    <!--                        <name>baby-tracker</name>-->
+                    <!--                    </image>-->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 
@@ -233,30 +251,6 @@
                     <compilerArgs>
                         <compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
                     </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--            if you want to build a docker image-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>build-image</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-                <configuration>
-                <!--            if you want to build a docker image-->
-<!--                    <image>-->
-<!--                        <name>baby-tracker</name>-->
-<!--                    </image>-->
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

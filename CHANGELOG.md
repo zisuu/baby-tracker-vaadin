@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.1](https://github.com/zisuu/baby-tracker-v2/compare/v1.2.0...v1.2.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* cleanup duplicated pom entry ([ddd1f42](https://github.com/zisuu/baby-tracker-v2/commit/ddd1f429e5c8967d62b4713f0486b2ceee59c0b7))
+
 # [1.2.0](https://github.com/zisuu/baby-tracker-v2/compare/v1.1.2...v1.2.0) (2024-03-13)
 
 

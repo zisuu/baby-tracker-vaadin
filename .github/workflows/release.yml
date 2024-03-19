@@ -40,5 +40,5 @@ jobs:
         run: heroku plugins:install java
       - name: deploy to heroku
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_TOKEN }}
         run: heroku deploy:jar target/baby-tracker-*.jar -a babytrackerapp

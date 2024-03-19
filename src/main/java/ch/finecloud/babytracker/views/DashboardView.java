@@ -17,6 +17,7 @@ import jakarta.annotation.security.PermitAll;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -59,7 +60,7 @@ public class DashboardView extends VerticalLayout {
             remove(startSleepButton);
             add(stopAndSaveButton);
             elapsedTime.setVisible(true);
-            startTime = LocalDateTime.now();
+            startTime = LocalDateTime.now(ZoneId.of("Europe/Zurich"));
 
             // Create and save the event in the backend
             service.saveEvent(new Event(

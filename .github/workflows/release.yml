@@ -31,8 +31,14 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Build with Maven
-        run: mvn -B package -Pproduction --file pom.xml
+        run: mvn -B verify -Pproduction
       - name: setup semantic-release
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog -D
       - name: release
         run: npx semantic-release
+      - name: login to heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku login
+      - name: deploy to heroku
+        run: heroku deploy:jar target/baby-tracker-*.jar -a babytrackerapp

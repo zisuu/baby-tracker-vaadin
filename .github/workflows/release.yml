@@ -20,24 +20,31 @@ jobs:
       id-token: write # to enable use of OIDC for npm provenance
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'adopt'
           cache: maven
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
+
       - name: Build with Maven
         run: mvn -B verify -Pproduction
+
       - name: setup semantic-release
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog -D
+
       - name: release
         run: npx semantic-release
+
       - name: setup heroku
         run: heroku plugins:install java
+
       - name: deploy to heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_TOKEN }}

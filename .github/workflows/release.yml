@@ -36,9 +36,9 @@ jobs:
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog -D
       - name: release
         run: npx semantic-release
-      - name: login to heroku
+      - name: setup heroku
+        run: heroku plugins:install java
+      - name: deploy to heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku login
-      - name: deploy to heroku
         run: heroku deploy:jar target/baby-tracker-*.jar -a babytrackerapp

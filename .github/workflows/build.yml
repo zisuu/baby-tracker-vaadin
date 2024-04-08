@@ -4,7 +4,7 @@
 name: Build
 
 on:
-  pull_request:
+  pull_request: null
 
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

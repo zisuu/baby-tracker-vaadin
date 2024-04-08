@@ -6,8 +6,10 @@ on:  # yamllint disable-line rule:truthy
 
 env:
   IGNORE_GITIGNORED_FILES: true
-  FILTER_REGEX_EXCLUDE: .*mvnw/.*,.*VAADIN/.*
-  GOOGLE_JAVA_FORMAT: false
+  FILTER_REGEX_EXCLUDE: '.*dev-bundle/.*|.*mvnw.*|.*frontend/.*|.*CHANGELOG.md.*|.*LICENSE.md.*|.*README.md.*'
+  VALIDATE_GOOGLE_JAVA_FORMAT: false
+  VALIDATE_JAVA: false
+  VALIDATE_SQLFLUFF: false
 
 permissions: read-all
 

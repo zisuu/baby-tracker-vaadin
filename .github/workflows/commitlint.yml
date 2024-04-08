@@ -1,9 +1,13 @@
+---
 name: commit-lint
 
-on: [push, pull_request]
+on:
+  pull_request: null
+
+permissions: read-all
 
 jobs:
-  lint:
+  commit-lint:
     runs-on: ubuntu-latest
 
     steps:

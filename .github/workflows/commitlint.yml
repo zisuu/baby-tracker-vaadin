@@ -1,7 +1,10 @@
+---
 name: commit-lint
 
 on:
   pull_request: null
+
+permissions: read-all
 
 jobs:
   lint:

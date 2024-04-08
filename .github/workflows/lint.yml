@@ -5,10 +5,11 @@ on:  # yamllint disable-line rule:truthy
   pull_request: null
 
 env:
-#  VALIDATE_JAVA: true
-#  VALIDATE_GITHUB_ACTIONS: true
   IGNORE_GITIGNORED_FILES: true
   FILTER_REGEX_EXCLUDE: .*mvnw/.*,.*VAADIN/.*
+  GOOGLE_JAVA_FORMAT: false
+
+permissions: read-all
 
 jobs:
   build:

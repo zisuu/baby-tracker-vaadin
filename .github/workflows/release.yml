@@ -8,6 +8,8 @@ on:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+permissions: {}
+
 jobs:
   release:
     runs-on: ubuntu-latest

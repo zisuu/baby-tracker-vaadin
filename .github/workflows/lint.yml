@@ -10,6 +10,7 @@ env:
   VALIDATE_GOOGLE_JAVA_FORMAT: false
   VALIDATE_JAVA: false
   VALIDATE_SQLFLUFF: false
+  VALIDATE_JSCPD: false
 
 permissions: {}
 

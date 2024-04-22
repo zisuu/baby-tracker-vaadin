@@ -11,7 +11,7 @@ env:
   VALIDATE_JAVA: false
   VALIDATE_SQLFLUFF: false
 
-permissions: read-all
+permissions: {}
 
 jobs:
   build:

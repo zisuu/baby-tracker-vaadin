@@ -7,7 +7,7 @@ on:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-permissions: read-all
+permissions: {}
 
 jobs:
   build:

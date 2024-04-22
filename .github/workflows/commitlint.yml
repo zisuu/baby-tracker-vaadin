@@ -4,7 +4,7 @@ name: commit-lint
 on:
   pull_request: null
 
-permissions: read-all
+permissions: {}
 
 jobs:
   commit-lint:

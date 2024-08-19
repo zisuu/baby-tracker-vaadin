@@ -1,5 +1,13 @@
 # Semantic Versioning Changelog
 
+## [1.2.7](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.6...v1.2.7) (2024-08-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.github.appreciated:apexcharts to v24.0.2 ([48d6484](https://github.com/zisuu/baby-tracker-vaadin/commit/48d6484040c1c1328c40d76bce9c2a011db95e01))
+* rename gh repo ([c699e3b](https://github.com/zisuu/baby-tracker-vaadin/commit/c699e3b14bfe43a0fa48e0e533910b4d4287e497))
+
 ## [1.2.6](https://github.com/zisuu/baby-tracker-v2/compare/v1.2.5...v1.2.6) (2024-07-23)
 
 

@@ -11,7 +11,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <vaadin.version>24.4.7</vaadin.version>
+        <vaadin.version>24.4.9</vaadin.version>
         <org.mapstruct.version>1.6.0</org.mapstruct.version>
     </properties>
 
@@ -166,7 +166,7 @@
         <dependency>
             <groupId>com.github.mvysny.kaributesting</groupId>
             <artifactId>karibu-testing-v10-spring</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.8</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -11,8 +11,8 @@
 
     <properties>
         <java.version>21</java.version>
-        <vaadin.version>24.4.7</vaadin.version>
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <vaadin.version>24.4.9</vaadin.version>
+        <org.mapstruct.version>1.6.0</org.mapstruct.version>
     </properties>
 
     <parent>
@@ -95,7 +95,7 @@
         <dependency>
             <groupId>com.github.appreciated</groupId>
             <artifactId>apexcharts</artifactId>
-            <version>24.0.1</version>
+            <version>24.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.parttio</groupId>
@@ -166,7 +166,7 @@
         <dependency>
             <groupId>com.github.mvysny.kaributesting</groupId>
             <artifactId>karibu-testing-v10-spring</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.8</version>
             <scope>test</scope>
         </dependency>
         <dependency>

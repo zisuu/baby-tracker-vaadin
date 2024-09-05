@@ -1,6 +1,6 @@
 {
   "branches": "main",
-  "repositoryUrl": "https://github.com/zisuu/baby-tracker-v2",
+  "repositoryUrl": "https://github.com/zisuu/baby-tracker-vaadin",
   "debug": "false",
   "plugins": [
     "@semantic-release/commit-analyzer",

@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.9](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.8...v1.2.9) (2024-09-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.flowingcode.addons:font-awesome-iron-iconset to v5.3.0 ([36c3088](https://github.com/zisuu/baby-tracker-vaadin/commit/36c30881ec6562b548c4037d545d31a1ab3350ec))
+
 ## [1.2.8](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.7...v1.2.8) (2024-09-05)
 
 

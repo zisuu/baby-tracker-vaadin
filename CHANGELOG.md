@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.10](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.9...v1.2.10) (2024-09-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.3.4 ([08aeb83](https://github.com/zisuu/baby-tracker-vaadin/commit/08aeb83f654ec5c75297539d991bd36f009097ab))
+
 ## [1.2.9](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.8...v1.2.9) (2024-09-09)
 
 

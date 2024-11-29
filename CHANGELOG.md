@@ -1,5 +1,13 @@
 # Semantic Versioning Changelog
 
+## [1.2.14](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.13...v1.2.14) (2024-11-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.parttio:line-awesome to v2.1.0 ([f162674](https://github.com/zisuu/baby-tracker-vaadin/commit/f1626740a5dbe70f04f4dfe1264622e3e12da32a))
+* **deps:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.4.0 ([1cee292](https://github.com/zisuu/baby-tracker-vaadin/commit/1cee292f5b04a106a0914e07ac9993172b9ac12c))
+
 ## [1.2.13](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.12...v1.2.13) (2024-11-29)
 
 

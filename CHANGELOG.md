@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.13](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.12...v1.2.13) (2024-11-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.vaadin:vaadin-bom to v24.5.6 ([e0c6256](https://github.com/zisuu/baby-tracker-vaadin/commit/e0c62564b71fcd0e96edec65c3c1b74ef1a40635))
+
 ## [1.2.12](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.11...v1.2.12) (2024-10-25)
 
 

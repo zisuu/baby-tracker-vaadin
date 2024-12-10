@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.15](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.14...v1.2.15) (2024-12-10)
+
+
+### Bug Fixes
+
+* **deps:** update vaadin.version to v24.5.8 ([13091a6](https://github.com/zisuu/baby-tracker-vaadin/commit/13091a684d6dafbfca2725579967288fdd36757a))
+
 ## [1.2.14](https://github.com/zisuu/baby-tracker-vaadin/compare/v1.2.13...v1.2.14) (2024-11-29)
 
 
